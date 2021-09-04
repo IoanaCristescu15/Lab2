@@ -1,52 +1,107 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <vector>
+using namespace std;
 
-// authors: Sarah Gregory and __, date revised: 9/__/2021
-// This program creates a String class.
-//
-// To compile this program:  g++ String.cpp -o 
-
-using std::string;
-struct String{
+struct String
+{
     string value;
 
-    //constructors:
-    String(){
-        value="";
+    String()
+    {
+        this->value = "";
     }
-    String(const String& other){
+
+    String(const String &other)
+    {
         this->value = other.value;
     }
-    String(const char* cString){
-        
-    }
-    //destructor
-    ~String(){
+
+    String(const char* cString)
+    {
+        //if (cString != '\0') 
+        //{
+            int size = strlen(cString);
+            for (int i = 0; i < size; i++)    
+            {
+                this->value = this->value + cString[i];
+            }   
+        //}
+       
     }
 
-    //methods
-    string toString(){
+    ~String()
+    {}
 
-    }
-    int length(){
-
-    }
-    String substring(int start, int end){
-
+    string toString()
+    {
+        return this->value;
     }
 
-    //operators
-    bool operator==(const String& other){
-        if (this->value == other.value) return true;
-        return false;
+    int length()
+    {
+        return this->value.size();
     }
-    String& operator=(const String& other){
-        ;
-    }
-    String& operator+=(const String& other){
-        ;
-    }
-
 };
+
+int main()
+{
+
+/*try {
+    String str0(nullptr);
+}
+catch (exception& e)
+{
+    cout << "aha!" << endl;
+}*/
+    cout << "+++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+    cout << endl << "Testing default constructor:" << endl;
+    cout         << "----------------------------" << endl;
+    
+    cout << "String str1;" << endl;
+    String str1;
+
+    cout << "\tLength: "   << str1.length() << " [0]" << endl;
+    cout << "\ttoString: \"" << str1.toString() << "\" [\"\"]" << endl << endl;
+
+    cout << "+++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+
+    cout << endl << "Testing const char* constructor:" << endl;
+    cout         << "--------------------------------" << endl;
+    
+    cout << "String str2(\"Jeff Tweedy\");" << endl;
+    String str2("Jeff Tweedy");
+
+    cout << "\tLength: "   << str2.length()   << " [11]" << endl;
+    cout << "\ttoString: \"" << str2.toString() << "\" [\"Jeff Tweedy\"]" 
+        << endl << endl;
+
+    cout << "String str2b(\"\");" << endl;
+    String str2b("");
+
+    //cout << "\tLength: "   << str2b.length()   << " [0]" << endl;
+    cout << "\ttoString: \"" << str2b.toString() << "\" [\"\"]" 
+        << endl << endl;
+
+    cout << "+++++++++++++++++++++++++++++++++++++++++++++++++" << endl;
+
+    cout << endl << "Testing copy constructor:" << endl;
+    cout         << "-------------------------" << endl;
+    
+    cout << "String str3(str2);" << endl;
+    String str3(str2);
+
+    //cout << "\tLength: "   << str3.length()   << " [11]" << endl;
+    cout << "\ttoString: \"" << str3.toString() << "\" [\"Jeff Tweedy\"]" 
+        << endl << endl;
+
+    cout << "String str3b(str2b);" << endl;
+    String str3b(str2b);
+
+    //cout << "\tLength: "   << str3b.length()   << " [0]" << endl;
+    cout << "\ttoString: \"" << str3b.toString() << "\" [\"\"]" 
+        << endl << endl;
+
+    return 0;
+
+}
